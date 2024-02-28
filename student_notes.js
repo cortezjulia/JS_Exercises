@@ -1,3 +1,6 @@
+//aplicacao que recebe uma quantidade n de notas, calcula a media do aluno usando uma regra de arredondamento da escola
+//posteriormente define reprovacao ou aprovacao
+
 let array_notes = []
 let array_weights=[]
 let note

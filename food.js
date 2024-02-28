@@ -1,8 +1,19 @@
+//aplicacao para leitura de menu de restaurante salvo em json 
+//o usuario insere o codigo dos itens que deseja comprar
+//retorna-se o valor de compra por produto e o valor total
+
 const fs = require('fs')
 const prompt = require('prompt-sync')
 const prompt_final = prompt()
 let array_cod = []
 let array_qnt = []
+let flag_find_cod
+let total
+let sum_totals=0
+let qnt_units
+let cod
+// Caminho para o arquivo JSON local
+const path = './food_menu.json'
 
 function format_money(value) {
   return value.toLocaleString('pt-BR', {
@@ -12,7 +23,7 @@ function format_money(value) {
 
 }
 function print_values(qnt_keys, cod, jsonData, qnt_units) {
-  let flag_find_cod=0
+  flag_find_cod = 0
   for (let i = 0; i < qnt_keys; i++) {
 
     if (jsonData[i].codigo == cod) {
@@ -20,30 +31,24 @@ function print_values(qnt_keys, cod, jsonData, qnt_units) {
       console.log(`Descrição: ${jsonData[i].descricao}`)
       console.log(`Preço: ${format_money(jsonData[i].preco)}`)
       console.log(`Quantidade: ${qnt_units}`)
-      let total = (jsonData[i].preco) * qnt_units
+      total = (jsonData[i].preco) * qnt_units
       console.log(`Total: ${format_money(total)}`)
-      flag_find_cod=1
+      flag_find_cod = 1
       return total
     }
   }
-  if(flag_find_cod==0){
+  if (flag_find_cod == 0) {
     console.log(`Código ${cod} não localizado.`)
-    return total=0
+    return total = 0
+  }
 }
-}
-
-
-
-
-// Caminho para o arquivo JSON local
-const path = './food_menu.json'
 
 while (true) {
   let enter = prompt_final("Digite o código do produto que deseja comprar: ")
-  let cod = parseInt(enter)
+  cod = parseInt(enter)
   array_cod.push(cod)
   enter = prompt_final("Quantidade: ")
-  let qnt_units = parseInt(enter)
+  qnt_units = parseInt(enter)
   array_qnt.push(qnt_units)
 
   enter = prompt_final("Finalizar o seu pedido? [s] ou [n]: ")
@@ -60,21 +65,18 @@ fs.readFile(path, 'utf8', (err, data) => {
     return
   }
 
-
-
-
   // Convertendo o conteúdo para objeto JavaScript
   jsonData = JSON.parse(data)
   const keys = Object.keys(jsonData)
-  const qnt_keys = (keys.length - 1)
-  let total=0
+  const qnt_keys = (keys.length)
+  total = 0
   console.log('\n')
   console.log(`Itens do seu pedido:`)
   for (let i = 0; i < array_cod.length; i++) {
-    total=print_values(qnt_keys, array_cod[i], jsonData, array_qnt[i])+total
+    sum_totals = print_values(qnt_keys, array_cod[i], jsonData, array_qnt[i]) + sum_totals
     console.log('\n')
   }
-  console.log(`Total da sua compra: ${format_money(total)}`)
+  console.log(`Total da sua compra: ${format_money(sum_totals)}`)
 })
 
 

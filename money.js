@@ -1,4 +1,4 @@
-//money converter
+//programa para testar a formatação monetária 
 
 let int_money=0.6789
 

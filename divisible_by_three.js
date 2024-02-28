@@ -1,3 +1,5 @@
+//'divisibilidade' por 3
+
 let int_user
 
 const prompt = require('prompt-sync')

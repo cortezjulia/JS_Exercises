@@ -1,20 +1,19 @@
-const prompt = require('prompt-sync')
-const prompt_final = prompt()
+//operacoes matematicas basicas
 
 let value1
 let value2
+let multi
+let sum
 
-
+const prompt = require('prompt-sync')
+const prompt_final = prompt()
 let enter = prompt_final("Digite o primeiro valor: ");
 value1 = parseFloat(enter)
-
-
 enter = prompt_final("Digite o segundo valor: ");
 value2 = parseFloat(enter)
 
 
-let multi
-let sum
+
 multi=(value1 * value2).toFixed(2)
 sum = (value1 + value2).toFixed(2)
 

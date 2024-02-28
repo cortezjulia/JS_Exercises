@@ -1,4 +1,4 @@
-
+//aplicacao que retorna o tipo de triangulo baseado nos medidas dos lados inseridos pelo usuario
 
 let side1
 let side2

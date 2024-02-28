@@ -1,3 +1,5 @@
+//resto de divisao divisao inteira
+
 let int_dividend=20
 let int_divisor=6
 
